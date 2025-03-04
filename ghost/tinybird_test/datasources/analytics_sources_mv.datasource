@@ -1,4 +1,5 @@
 SCHEMA >
+    `site_uuid` String,
     `date` Date,
     `device` String,
     `browser` String,

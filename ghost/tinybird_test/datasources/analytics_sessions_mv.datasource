@@ -1,4 +1,5 @@
 SCHEMA >
+    `site_uuid` String,
     `date` Date,
     `session_id` String,
     `device` SimpleAggregateFunction(any, String),

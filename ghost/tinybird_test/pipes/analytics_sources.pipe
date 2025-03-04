@@ -4,6 +4,7 @@ DESCRIPTION >
 
 SQL >
     SELECT
+        site_uuid,
         toDate(timestamp) AS date,
         device,
         browser,
@@ -13,7 +14,7 @@ SQL >
         countState() AS hits
     FROM analytics_hits
     WHERE domainWithoutWWW(referrer) != current_domain
-    GROUP BY date, device, browser, location, referrer
+    GROUP BY site_uuid, date, device, browser, location, referrer
 
 TYPE MATERIALIZED
 DATASOURCE analytics_sources_mv
