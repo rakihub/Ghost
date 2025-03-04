@@ -2,11 +2,11 @@ const {promises: fs} = require('fs');
 const path = require('path');
 const moment = require('moment');
 const htmlToPlaintext = require('@tryghost/html-to-plaintext');
-const emailService = require('../email-service');
 
 class CommentsServiceEmails {
-    constructor({config, logging, models, mailer, settingsCache, settingsHelpers, urlService, urlUtils}) {
+    constructor({config, emailService, logging, models, mailer, settingsCache, settingsHelpers, urlService, urlUtils}) {
         this.config = config;
+        this.emailService = emailService;
         this.logging = logging;
         this.models = models;
         this.mailer = mailer;
@@ -100,7 +100,7 @@ class CommentsServiceEmails {
             accentColor: this.settingsCache.get('accent_color'),
             fromEmail: this.notificationFromAddress,
             toEmail: to,
-            profileUrl: emailService.renderer.createUnsubscribeUrl(member.get('uuid'), {comments: true})
+            profileUrl: this.emailService.renderer.createUnsubscribeUrl(member.get('uuid'), {comments: true})
         };
 
         const {html, text} = await this.renderEmailTemplate('new-comment-reply', templateData);

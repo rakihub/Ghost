@@ -5,6 +5,7 @@ class CommentsServiceWrapper {
         const CommentsStats = require('./CommentsStatsService');
 
         const config = require('../../../shared/config');
+        const emailService = require('../email-service');
         const logging = require('@tryghost/logging');
         const models = require('../../models');
         const {GhostMailer} = require('../mail');
@@ -18,6 +19,7 @@ class CommentsServiceWrapper {
 
         this.api = new CommentsService({
             config,
+            emailService,
             logging,
             models,
             mailer,
